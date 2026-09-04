@@ -9,7 +9,7 @@ export function PerguntasFrequentes() {
     <section
       id="perguntas-frequentes"
       aria-labelledby="faq-titulo"
-      className="border-y border-line bg-surface"
+      className="scroll-mt-24 border-y border-line bg-surface"
     >
       <Container className="grid gap-12 py-20 md:py-28 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
