@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
@@ -16,6 +16,8 @@ export function Header() {
   const caminho = usePathname();
   const [rolou, setRolou] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
+  const painelRef = useRef<HTMLDivElement>(null);
+  const botaoDeAbrirRef = useRef<HTMLButtonElement>(null);
 
   /* Borda inferior de 1px so aparece depois que a pagina rola. */
   useEffect(() => {
@@ -25,21 +27,57 @@ export function Header() {
     return () => window.removeEventListener("scroll", aoRolar);
   }, []);
 
-  /* O painel mobile ocupa a tela inteira: trava a rolagem do fundo. */
+  /*
+   * O painel mobile cobre a tela inteira, entao se comporta como dialogo:
+   * trava a rolagem do fundo, leva o foco para dentro, prende o Tab no painel e
+   * devolve o foco ao botao que o abriu quando fecha. Sem a prisao do Tab, o foco
+   * caminharia por links invisiveis atras do painel, que e o pior caso possivel
+   * para quem navega so pelo teclado.
+   */
   useEffect(() => {
     if (!menuAberto) return;
 
+    const painel = painelRef.current;
+    /* Guardado agora: no cleanup a ref ja pode apontar para outro no. */
+    const botaoDeAbrir = botaoDeAbrirRef.current;
+    const focaveis = () =>
+      Array.from(
+        painel?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? [],
+      ).filter((elemento) => elemento.offsetParent !== null);
+
+    focaveis()[0]?.focus();
+
     const aoTeclar = (evento: KeyboardEvent) => {
-      if (evento.key === "Escape") setMenuAberto(false);
+      if (evento.key === "Escape") {
+        setMenuAberto(false);
+        return;
+      }
+      if (evento.key !== "Tab") return;
+
+      const lista = focaveis();
+      if (lista.length === 0) return;
+
+      const primeiro = lista[0];
+      const ultimo = lista[lista.length - 1];
+      const atual = document.activeElement;
+
+      if (evento.shiftKey && (atual === primeiro || !painel?.contains(atual))) {
+        evento.preventDefault();
+        ultimo.focus();
+      } else if (!evento.shiftKey && atual === ultimo) {
+        evento.preventDefault();
+        primeiro.focus();
+      }
     };
 
     const overflowAnterior = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", aoTeclar);
+    document.addEventListener("keydown", aoTeclar);
 
     return () => {
       document.body.style.overflow = overflowAnterior;
-      window.removeEventListener("keydown", aoTeclar);
+      document.removeEventListener("keydown", aoTeclar);
+      botaoDeAbrir?.focus();
     };
   }, [menuAberto]);
 
@@ -97,12 +135,13 @@ export function Header() {
         </div>
 
         <button
+          ref={botaoDeAbrirRef}
           type="button"
           onClick={() => setMenuAberto(true)}
           aria-label="Abrir menu"
           aria-expanded={menuAberto}
           aria-controls="menu-mobile"
-          className="rounded-sm p-2 text-ink lg:hidden"
+          className="rounded-sm p-2.5 text-ink lg:hidden"
         >
           <Menu size={24} strokeWidth={1.5} aria-hidden="true" />
         </button>
@@ -111,6 +150,10 @@ export function Header() {
       {menuAberto ? (
         <div
           id="menu-mobile"
+          ref={painelRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu de navegação"
           className="fixed inset-0 z-50 flex flex-col bg-white lg:hidden"
         >
           <Container className="flex items-center justify-between py-4">
@@ -125,13 +168,20 @@ export function Header() {
               type="button"
               onClick={() => setMenuAberto(false)}
               aria-label="Fechar menu"
-              className="rounded-sm p-2 text-ink"
+              className="rounded-sm p-2.5 text-ink"
             >
               <X size={24} strokeWidth={1.5} aria-hidden="true" />
             </button>
           </Container>
 
-          <Container as="nav" className="flex flex-1 flex-col justify-between pt-8 pb-10">
+          {/* Rotulo proprio: sem ele o painel entra na lista de marcos do leitor de
+              tela como uma navegacao sem nome. Nao conflita com a nav do topo, que
+              fica em display:none nesta largura e nao e exposta. */}
+          <Container
+            as="nav"
+            aria-label="Navegação principal"
+            className="flex flex-1 flex-col justify-between pt-8 pb-10"
+          >
             <ul className="flex flex-col gap-2">
               {navegacaoPrincipal.map((item) => {
                 const atual = ehAtual(item.href);

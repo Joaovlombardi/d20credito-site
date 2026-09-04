@@ -114,6 +114,17 @@
     outline-offset: 2px;
   }
 
+  /*
+   * Anel de foco sobre superficie escura.
+   * O verde da marca sobre o verde escuro fica em 1.83:1 e desaparece. O criterio
+   * 2.4.11 da WCAG pede 3:1 para o indicador de foco, entao dentro de qualquer
+   * superficie forest o anel vira branco, que da 6.20:1. Afeta os links do rodape,
+   * que aparecem nas seis rotas, e o bloco de canais oficiais do contato.
+   */
+  .bg-forest :focus-visible {
+    outline-color: var(--color-white);
+  }
+
   ::selection {
     background-color: var(--color-mint);
     color: var(--color-forest);

@@ -20,7 +20,9 @@ export function LinkDeTexto({
     <Link
       href={href}
       className={cn(
-        "group inline-flex items-center gap-2 font-heading text-sm font-semibold text-forest",
+        /* py-1 leva o alvo a 32px de altura. Sem ele fica em 24px cravados, no limite
+     exato do criterio 2.5.8, e este e um link que se toca no celular. */
+        "group inline-flex items-center gap-2 py-1 font-heading text-sm font-semibold text-forest",
         "underline decoration-transparent underline-offset-4 transition-colors hover:decoration-green",
         className,
       )}

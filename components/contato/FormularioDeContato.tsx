@@ -269,7 +269,7 @@ export function FormularioDeContato() {
             aria-invalid={Boolean(erros.consentimento)}
             aria-describedby={erros.consentimento ? "erro-consentimento" : undefined}
             className={cn(
-              "mt-1 size-5 shrink-0 rounded-sm accent-forest",
+              "mt-1 size-6 shrink-0 rounded-sm accent-forest",
               erros.consentimento ? bordaComErro : bordaNormal,
             )}
           />

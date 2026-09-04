@@ -21,8 +21,11 @@ function RotuloColuna({ children }: { children: string }) {
   );
 }
 
+/* inline-block com py-1.5 leva o alvo de 19px para 31px de altura. O criterio
+   2.5.8 da WCAG pede 24px, e link de rodape em lista nao tem a excecao de texto
+   corrido: e um item de navegacao, tocado com o polegar. */
 const linkRodape =
-  "text-sm text-white underline decoration-transparent underline-offset-4 transition-colors hover:decoration-mint";
+  "inline-block py-1.5 text-sm text-white underline decoration-transparent underline-offset-4 transition-colors hover:decoration-mint";
 
 export function Footer() {
   return (
@@ -44,7 +47,7 @@ export function Footer() {
 
           <nav aria-label="Navegação do rodapé">
             <RotuloColuna>Navegação</RotuloColuna>
-            <ul className="mt-5 flex flex-col gap-3">
+            <ul className="mt-4 flex flex-col gap-1">
               {navegacaoPrincipal.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className={linkRodape}>
@@ -57,7 +60,7 @@ export function Footer() {
 
           <nav aria-label="Institucional">
             <RotuloColuna>Institucional</RotuloColuna>
-            <ul className="mt-5 flex flex-col gap-3">
+            <ul className="mt-4 flex flex-col gap-1">
               {navegacaoInstitucional.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className={linkRodape}>

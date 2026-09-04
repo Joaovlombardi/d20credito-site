@@ -30,7 +30,7 @@ export function CanaisOficiais() {
               {item.href && item.valor ? (
                 <a
                   href={item.href}
-                  className="underline decoration-mint underline-offset-4 transition-colors hover:decoration-white"
+                  className="inline-block py-1 underline decoration-mint underline-offset-4 transition-colors hover:decoration-white"
                 >
                   {item.valor}
                 </a>
