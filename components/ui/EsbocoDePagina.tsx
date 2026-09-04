@@ -3,10 +3,12 @@ import type { ReactNode } from "react";
 import { Container } from "@/components/ui/Container";
 
 /**
- * TEMPORARIO.
- * Marca uma pagina cujo conteudo ainda nao foi escrito, mantendo a escala
- * tipografica e as cores reais. Cada pagina substitui esta chamada pelo seu
- * conteudo nas etapas 3 a 6, e o arquivo sai do projeto no fim.
+ * Pagina com conteudo pendente de terceiros.
+ *
+ * Restam duas: politica de privacidade e termos de uso. O texto das duas e
+ * juridico, precisa ser fornecido e revisado pelo juridico, e nao pode ser
+ * redigido aqui. Ate la elas existem, navegam e ficam fora do indice de busca,
+ * exibindo o aviso do que falta. Quando o texto chegar, este arquivo sai.
  */
 
 type EsbocoDePaginaProps = {

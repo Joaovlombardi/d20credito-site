@@ -20,8 +20,10 @@ type BotaoLinkProps = {
 const variantes = {
   primario:
     "border border-forest bg-forest text-white hover:border-green hover:bg-white hover:text-forest",
+  /* border-gray e nao border-line: em botao a borda e o contorno do controle e
+     precisa de 3:1 pela WCAG 1.4.11. line da 1.16:1 e some contra o branco. */
   secundario:
-    "border border-line bg-white text-forest hover:border-green hover:bg-surface",
+    "border border-gray bg-white text-forest hover:border-green hover:bg-surface",
 } as const;
 
 export function BotaoLink({
