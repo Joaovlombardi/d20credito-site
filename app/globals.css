@@ -88,7 +88,15 @@
  *   - Texto verde em tamanho de corpo, link inclusive: use forest, nunca green.
  *   - green fica para titulo grande, traco de icone, borda e estado de hover,
  *     onde o minimo aplicavel e 3:1.
- *   - No fundo forest, texto corrido em white. mint so em titulo grande ou label.
+ *   - No fundo forest, texto corrido em white. mint so em titulo grande ou detalhe.
+ *
+ * Decisao travada para o CTA primario (opcao A):
+ *   - Preenchimento forest com rotulo branco, 6.20, passa em qualquer tamanho.
+ *   - Hover inverte para fundo branco com rotulo forest e borda green. green nao
+ *     preenche botao de rotulo branco em nenhum estado, nem no hover: 3.39
+ *     reprova AA em tamanho de corpo, e o criterio vale para todos os estados.
+ *   - Link ativo: o texto fica em ink ou forest e o green marca o sublinhado.
+ *     green sinaliza, nunca carrega o texto pequeno.
  */
 
 @layer base {

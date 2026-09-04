@@ -9,7 +9,8 @@
 
 export const dadosEmpresa = {
   nomeFantasia: "D20 Cred",
-  razaoSocial: "[PLACEHOLDER: razão social completa]",
+  /* Nome informado pelo briefing. Confirmar a razão social registrada por extenso. */
+  razaoSocial: "D20 Capital Ltda",
   cnpj: "[PLACEHOLDER: CNPJ]",
   site: "https://d20credito.com.br",
   endereco: {

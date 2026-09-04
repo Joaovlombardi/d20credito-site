@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Archivo_Black, Inter, Poppins } from "next/font/google";
+
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
 import "./globals.css";
 
 /* Archivo Black existe em um unico peso. Headline de impacto, uso pontual. */
@@ -56,9 +59,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${archivoBlack.variable} ${poppins.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white text-ink">
-        {/* Header entra na etapa 2 */}
-        <main className="flex-1">{children}</main>
-        {/* Footer entra na etapa 2 */}
+        <a
+          href="#conteudo"
+          /* Fora da tela ate receber foco. Nao use sr-only aqui: o Tailwind 4.3
+             nao tem not-sr-only para desfazer, e o link ficaria invisivel no foco. */
+          className="fixed -top-20 left-4 z-[60] rounded-md border border-forest bg-white px-4 py-3 font-heading text-sm font-semibold text-forest focus:top-4"
+        >
+          Pular para o conteúdo
+        </a>
+        <Header />
+        <main id="conteudo" className="flex-1">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
