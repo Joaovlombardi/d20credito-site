@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
-import { dadosEmpresa, logos, parceiro } from "@/content/dados-empresa";
+import { dadosEmpresa, enderecoCompleto, logos, parceiro } from "@/content/dados-empresa";
 import { navegacaoInstitucional, navegacaoPrincipal } from "@/content/navegacao";
 import { avisoCanaisOficiais, disclaimerCorrespondente } from "@/content/textos-legais";
 
@@ -118,9 +118,7 @@ export function Footer() {
           </div>
 
           <p className="mt-8 text-xs text-white">
-            {dadosEmpresa.razaoSocial}, CNPJ {dadosEmpresa.cnpj}. {endereco.logradouro},{" "}
-            {endereco.complemento}, {endereco.bairro}, {endereco.cidade}, {endereco.uf},
-            CEP {endereco.cep}.
+            {dadosEmpresa.razaoSocial}, CNPJ {dadosEmpresa.cnpj}. {enderecoCompleto}.
           </p>
         </div>
       </Container>

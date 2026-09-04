@@ -1,13 +1,27 @@
-import { EsbocoDePagina } from "@/components/ui/EsbocoDePagina";
+import { Hero } from "@/components/home/Hero";
+import { FaixaDeCredibilidade } from "@/components/home/FaixaDeCredibilidade";
+import { Problema } from "@/components/home/Problema";
+import { ResumoLegalEquity } from "@/components/home/ResumoLegalEquity";
+import { ComoFunciona } from "@/components/home/ComoFunciona";
+import { BlocoDeConfianca } from "@/components/home/BlocoDeConfianca";
+import { Parametros } from "@/components/home/Parametros";
+import { PerguntasFrequentes } from "@/components/home/PerguntasFrequentes";
+import { ChamadaFinal } from "@/components/home/ChamadaFinal";
 
-/* Titulo herda o default do layout raiz. */
+/* Titulo e descricao herdam o default do layout raiz. */
 
 export default function HomePage() {
   return (
-    <EsbocoDePagina
-      titulo="Crédito com a garantia do seu processo trabalhista."
-      resumo="Você recebe agora, sem esperar o processo terminar. O processo continua no seu nome e com o mesmo advogado."
-      etapa="Conteúdo da Home na etapa 3: hero, faixa de credibilidade, o problema, Legal Equity em resumo, como funciona, bloco de confiança, parâmetros do produto, perguntas frequentes e CTA final."
-    />
+    <>
+      <Hero />
+      <FaixaDeCredibilidade />
+      <Problema />
+      <ResumoLegalEquity />
+      <ComoFunciona />
+      <BlocoDeConfianca />
+      <Parametros />
+      <PerguntasFrequentes />
+      <ChamadaFinal />
+    </>
   );
 }

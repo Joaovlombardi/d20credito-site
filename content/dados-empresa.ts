@@ -1,34 +1,41 @@
 /**
  * Fonte unica dos dados institucionais.
  *
- * Todo valor marcado como [PLACEHOLDER] precisa ser confirmado antes de publicar.
- * Nao preencha nenhum destes campos por estimativa: CNPJ, endereco, telefone,
- * e-mail, horario e numeros de resultado sao dados verificaveis e um valor errado
+ * Os dados preenchidos abaixo sao os dados publicos ja divulgados pela empresa,
+ * confirmados pelo responsavel do projeto. Todo valor marcado como [PLACEHOLDER]
+ * continua pendente e nao pode ser preenchido por estimativa: um valor errado
  * aqui aparece no rodape de todas as paginas.
  */
 
 export const dadosEmpresa = {
   nomeFantasia: "D20 Cred",
-  /* Nome informado pelo briefing. Confirmar a razão social registrada por extenso. */
   razaoSocial: "D20 Capital Ltda",
-  cnpj: "[PLACEHOLDER: CNPJ]",
+  cnpj: "64.776.682/0001-01",
   site: "https://d20credito.com.br",
   endereco: {
-    logradouro: "[PLACEHOLDER: logradouro e número]",
-    complemento: "[PLACEHOLDER: complemento]",
-    bairro: "[PLACEHOLDER: bairro]",
+    logradouro: "Av. Brigadeiro Faria Lima, 1713",
+    bairro: "Jardim Paulistano",
     cidade: "São Paulo",
     uf: "SP",
-    cep: "[PLACEHOLDER: CEP]",
+    cep: "01452-915",
   },
   contato: {
-    email: "[PLACEHOLDER: e-mail]",
-    telefone: "[PLACEHOLDER: telefone]",
+    email: "contato@d20credito.com.br",
+    telefone: "(11) 5282-4130",
+    /* Nao ha numero de WhatsApp divulgado. Nao reaproveitar o telefone fixo. */
     whatsapp: "[PLACEHOLDER: WhatsApp]",
   },
   /* Existe divergência aberta entre as fontes internas e o site atual. Não fixe horário. */
   horarioAtendimento: "[PLACEHOLDER: confirmar com o RO antes de publicar]",
 } as const;
+
+/** Endereço em uma linha, para o texto legal e para a linha de identificação. */
+export const enderecoCompleto = [
+  dadosEmpresa.endereco.logradouro,
+  dadosEmpresa.endereco.bairro,
+  `${dadosEmpresa.endereco.cidade}, ${dadosEmpresa.endereco.uf}`,
+  `CEP ${dadosEmpresa.endereco.cep}`,
+].join(", ");
 
 /** Seção de números da página Sobre. Nenhum valor pode ser estimado. */
 export const numeros = {
