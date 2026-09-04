@@ -1,26 +1,113 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Tokens da D20 Cred.
+ * As paletas e escalas padrao do Tailwind sao zeradas de proposito: as regras do
+ * BRIEFING.md (cor fora da paleta, sombra difusa, blur, raio acima de 12px)
+ * passam a ser aplicadas pelo compilador, nao pela revisao manual.
+ */
+@theme {
+  /* Zera as paletas padrao. Nenhuma cor fora da marca compila. */
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Marca */
+  --color-mint: #5dcaa5;    /* acento claro, superficies leves, numeracao */
+  --color-green: #1d9e75;   /* ancora: CTA, link, destaque */
+  --color-forest: #0f6e56;  /* secao escura, texto verde sobre branco */
+
+  /* Neutros de sistema, autorizados pela secao 3 do briefing */
+  --color-white: #ffffff;
+  --color-surface: #fafafa; /* secao alternada */
+  --color-line: #ebebeb;    /* borda de 1px, no lugar de sombra */
+  --color-gray: #737373;    /* texto secundario, legenda, label */
+  --color-ink: #1a1a1a;     /* texto principal, quase-preto */
+
+  /* Tipografia */
+  --font-display: var(--font-archivo-black), system-ui, sans-serif;
+  --font-heading: var(--font-poppins), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  /* Escala fechada. Nada dos tamanhos padrao do Tailwind. */
+  --text-*: initial;
+  --text-xs: 0.8125rem;      /* 13 */
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.9375rem;      /* 15 */
+  --text-sm--line-height: 1.6;
+  --text-base: 1.0625rem;    /* 17, corpo */
+  --text-base--line-height: 1.7;
+  --text-lg: 1.1875rem;      /* 19, subtitulo */
+  --text-lg--line-height: 1.7;
+  --text-xl: 1.5rem;         /* 24 */
+  --text-xl--line-height: 1.35;
+  --text-2xl: 2rem;          /* 32 */
+  --text-2xl--line-height: 1.2;
+  --text-3xl: 2.5rem;        /* 40 */
+  --text-3xl--line-height: 1.15;
+  --text-4xl: 3.25rem;       /* 52 */
+  --text-4xl--line-height: 1.05;
+  --text-5xl: 4.25rem;       /* 68, hero desktop */
+  --text-5xl--line-height: 1;
+
+  /* Teto de 12px em card e secao, 8px em botao */
+  --radius-*: initial;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Sombra e blur proibidos. Separacao visual e borda de 1px. */
+  --shadow-*: initial;
+  --drop-shadow-*: initial;
+  --blur-*: initial;
+
+  /* Larguras */
+  --container-measure: 68ch; /* largura de leitura, ~68 caracteres. Nao use max-w-prose: no
+                                Tailwind v4 ele e utilitario fixo em 65ch e ignora o token. */
+  --container-page: 1200px;  /* conteiner da pagina */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/*
+ * CONTRASTE, medido com a formula WCAG 2.1 sobre os valores acima.
+ * A paleta e travada pelo briefing, entao a conformidade AA depende do USO.
+ *
+ *   ink    sobre white    17.40  ok em qualquer tamanho
+ *   forest sobre white     6.20  ok em qualquer tamanho
+ *   gray   sobre white     4.74  ok em qualquer tamanho
+ *   gray   sobre surface   4.54  ok em qualquer tamanho
+ *   white  sobre forest    6.20  ok em qualquer tamanho
+ *   ink    sobre mint      8.67  ok em qualquer tamanho
+ *   green  sobre white     3.39  SO texto grande
+ *   white  sobre green     3.39  SO texto grande
+ *   mint   sobre forest    3.09  SO texto grande
+ *   mint   sobre white     2.01  nunca, ja proibido pelo briefing
+ *
+ * Texto grande, na definicao da WCAG: a partir de 24px, ou 18.66px em bold.
+ *
+ * Regra de uso:
+ *   - Texto verde em tamanho de corpo, link inclusive: use forest, nunca green.
+ *   - green fica para titulo grande, traco de icone, borda e estado de hover,
+ *     onde o minimo aplicavel e 3:1.
+ *   - No fundo forest, texto corrido em white. mint so em titulo grande ou label.
+ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.7;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Foco visivel, criterio de acessibilidade da secao 5 do briefing */
+  :focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-mint);
+    color: var(--color-forest);
+  }
 }
