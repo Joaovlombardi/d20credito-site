@@ -39,7 +39,9 @@ export function Hero() {
         </div>
 
         <div className="lg:col-span-4 lg:col-start-9">
-          <EspacoDeFoto descricao={hero.foto} className="h-full" />
+          {/* Sem h-full: com altura definida e largura auto, o aspect-ratio passa a
+              calcular a LARGURA a partir da altura e a foto estoura a coluna. */}
+          <EspacoDeFoto descricao={hero.foto} />
         </div>
       </Container>
     </section>

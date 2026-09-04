@@ -1,19 +1,46 @@
 import type { Metadata } from "next";
 
-import { EsbocoDePagina } from "@/components/ui/EsbocoDePagina";
+import { Abertura } from "@/components/sobre/Abertura";
+import { BlocoEditorial, ParagrafoEditorial } from "@/components/sobre/BlocoEditorial";
+import { PorQueExiste } from "@/components/sobre/PorQueExiste";
+import { ComoOperamos } from "@/components/sobre/ComoOperamos";
+import { Numeros } from "@/components/sobre/Numeros";
+import { Encerramento } from "@/components/sobre/Encerramento";
+import { deOndeViemos } from "@/content/sobre";
 
 export const metadata: Metadata = {
-  title: "Sobre",
+  title: "Sobre a D20 Cred",
   description:
-    "A D20 Cred é a marca do grupo Artemis para crédito com garantia de direitos creditórios judiciais.",
+    "A D20 Cred é a marca do grupo Artemis para crédito com garantia de direitos creditórios judiciais. De onde viemos, por que a empresa existe e como funciona a estrutura de correspondente bancário.",
+  alternates: { canonical: "/sobre" },
+  openGraph: {
+    type: "article",
+    url: "/sobre",
+    title: "Sobre a D20 Cred",
+    description:
+      "De onde viemos, por que a empresa existe e como funciona a estrutura de correspondente bancário.",
+  },
 };
 
 export default function SobrePage() {
   return (
-    <EsbocoDePagina
-      titulo="Sobre a D20 Cred"
-      resumo="A D20 Cred é a marca do grupo Artemis para crédito com garantia de direitos creditórios judiciais."
-      etapa="Conteúdo da página Sobre na etapa 5: abertura, de onde viemos, por que existe, como operamos, números e encerramento."
-    />
+    <>
+      <Abertura />
+
+      <BlocoEditorial
+        id="de-onde-viemos"
+        rotulo={deOndeViemos.rotulo}
+        titulo={deOndeViemos.titulo}
+      >
+        {deOndeViemos.paragrafos.map((paragrafo) => (
+          <ParagrafoEditorial key={paragrafo.slice(0, 32)}>{paragrafo}</ParagrafoEditorial>
+        ))}
+      </BlocoEditorial>
+
+      <PorQueExiste />
+      <ComoOperamos />
+      <Numeros />
+      <Encerramento />
+    </>
   );
 }

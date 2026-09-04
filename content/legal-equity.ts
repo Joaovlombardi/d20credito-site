@@ -85,7 +85,7 @@ export const comoFuncionaDetalhado = {
     },
     {
       titulo: "Contrato e liberação",
-      texto: `Aprovado, você recebe o contrato com valor, prazo, taxa e Custo Efetivo Total escritos, antes de assinar. O contrato é uma CCB emitida pela ${parceiro.nome}. Com a assinatura eletrônica feita, o valor cai por Pix.`,
+      texto: `Aprovado, você recebe o contrato com valor, prazo, taxa e Custo Efetivo Total escritos, antes de assinar. O contrato é uma CCB emitida pela ${parceiro.nome}, e com a assinatura eletrônica feita o valor cai por Pix.`,
     },
   ],
   nota: "O prazo total varia conforme a análise. Nenhuma data de liberação é prometida antes da aprovação do crédito.",
